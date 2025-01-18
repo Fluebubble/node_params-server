@@ -23,11 +23,11 @@ function createServer() {
     const query = Object.fromEntries(normalizedUrl.searchParams.entries());
     // const query = {};
 
-    // for (const key in query) {
-    //   if (!query[key]) {
-    //     delete query[key];
-    //   }
-    // }
+    for (const key in query) {
+      if (!query[key]) {
+        delete query[key];
+      }
+    }
 
     console.log(normalizedUrl);
     // console.log(req.headers.host);
