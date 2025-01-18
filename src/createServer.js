@@ -22,7 +22,10 @@ function createServer() {
       parts,
       query,
     };
-    console.log(data);
+    // console.log(data);
+
+    res.setHeader('Content-Type', 'application/json');
+    res.end(data);
   });
 
   return server;
