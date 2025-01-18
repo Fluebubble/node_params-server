@@ -21,10 +21,17 @@ function createServer() {
       .filter((part) => part !== '');
 
     const query = Object.fromEntries(normalizedUrl.searchParams.entries());
+    // const query = {};
+
+    // for (const key in query) {
+    //   if (!query[key]) {
+    //     delete query[key];
+    //   }
+    // }
 
     console.log(normalizedUrl);
     // console.log(req.headers.host);
-    // console.log(req.url);
+    console.log(query);
     const data = {
       parts,
       query,
