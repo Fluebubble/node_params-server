@@ -8,19 +8,23 @@ function createServer() {
   // Return instance of http.Server class
   const server = http.createServer((req, res) => {
     const normalizedUrl = new URL(req.url, `http://${req.headers.host}`);
+    console.log(normalizedUrl);
+
+    res.setHeader('Content-Type', 'application/json');
 
     if (normalizedUrl.pathname === '/') {
       res.statusCode = 200;
 
-      res.end();
-      return;
+      // res.end();
+      // return;
     }
 
     const parts = normalizedUrl.pathname
       .split('/')
       .filter((part) => part !== '');
 
-    const query = Object.fromEntries(normalizedUrl.searchParams.entries());
+    const query =
+      Object.fromEntries(normalizedUrl.searchParams.entries()) || {};
     // const query = {};
 
     // for (const key in query) {
@@ -29,7 +33,6 @@ function createServer() {
     //   }
     // }
 
-    console.log(normalizedUrl);
     // console.log(req.headers.host);
     console.log(query);
     const data = {
@@ -37,8 +40,8 @@ function createServer() {
       query,
     };
     // console.log(data);
+    console.log(data);
 
-    res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(data));
   });
 
