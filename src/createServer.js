@@ -9,13 +9,20 @@ function createServer() {
   const server = http.createServer((req, res) => {
     const normalizedUrl = new URL(req.url, `http://${req.headers.host}`);
 
+    if (normalizedUrl.pathname === '/') {
+      res.statusCode = 200;
+
+      res.end();
+      return;
+    }
+
     const parts = normalizedUrl.pathname
       .split('/')
       .filter((part) => part !== '');
 
     const query = Object.fromEntries(normalizedUrl.searchParams.entries());
 
-    // console.log(normalizedUrl);
+    console.log(normalizedUrl);
     // console.log(req.headers.host);
     // console.log(req.url);
     const data = {
@@ -25,7 +32,7 @@ function createServer() {
     // console.log(data);
 
     res.setHeader('Content-Type', 'application/json');
-    res.end(data);
+    res.end(JSON.stringify(data));
   });
 
   return server;
